@@ -5,6 +5,6 @@ import './Header.css';
 
 export const Header = () => {
   return (
-    <span className="header">Movie App 🎥</span>
+    <span onClick={() =>{ window.scroll(0,0)}} className="header">Movie App 🎥</span>
   )
 };
