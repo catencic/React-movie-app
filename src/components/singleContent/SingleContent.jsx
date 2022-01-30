@@ -2,6 +2,7 @@
 
 import { Badge } from "@material-ui/core";
 import { img_300, unavailable } from '../config/config';
+import { ContentModal } from "../contentModal/ContentModal";
 
 import './SingleContent.css';
 
@@ -18,7 +19,7 @@ export const SingleContent = ({
 
 
   return (
-    <div className="media">
+    <ContentModal media_type={media_type} id={id}>
        <Badge
         badgeContent={vote_average}
         color={vote_average > 6 ? "primary" : "secondary"}
@@ -37,6 +38,6 @@ export const SingleContent = ({
        
 
 
-    </div>
+    </ContentModal>
   )
 };

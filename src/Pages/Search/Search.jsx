@@ -50,8 +50,11 @@ export const Search = () => {
 
 
   useEffect(() => {
-    window.scroll(0, 0);
-    fetchSearch();
+    if(searchText){
+
+      window.scroll(0, 0);
+      fetchSearch();
+    }
   }, [type, page]);
 
 
