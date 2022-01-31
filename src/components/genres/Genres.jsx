@@ -11,6 +11,7 @@ export const Genres = ({
     setGenres,
     type,
     setPage,
+    setContent
 }) => {
 
   const fetchGenres = async () => {
@@ -34,6 +35,8 @@ export const Genres = ({
     setSelectedGenres([...selectedGenres, genre]);
     setGenres(genres.filter((g) => g.id !== genre.id));
     setPage(1);
+    setContent({ loading: true });
+    
   };
 
   const handleRemove =  (genre) => {
@@ -42,6 +45,7 @@ export const Genres = ({
     );
     setGenres([...genres, genre]);
     setPage(1);
+    setContent({ loading: true });
   }
 
 

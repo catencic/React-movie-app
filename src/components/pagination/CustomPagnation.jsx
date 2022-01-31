@@ -8,11 +8,12 @@ const darkTheme = createTheme({
   });
 
 
-export const CustomPagnation = ({setPage , numOfPages = 10 }) => {
+export const CustomPagnation = ({setPage , numOfPages = 10  , setContent}) => {
 
   
     const handlePageChange = (page) => {
         setPage(page);
+        setContent({ loading: true });
         window.scroll(0, 0);
       };
     

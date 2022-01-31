@@ -1,6 +1,6 @@
 
 
-export const useGenre = (selectedGenres) => {
+export const getGenre = (selectedGenres) => {
  
     if(selectedGenres.length < 1) return ;
 
@@ -10,6 +10,3 @@ export const useGenre = (selectedGenres) => {
 
 
 };
-
-//exam   [1,2,3,4]
-// results  1,2,3,4
