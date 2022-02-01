@@ -37,7 +37,7 @@ export const Search = () => {
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
 
-  const isLoading = useRef(true);
+  const isLoad = useRef(false);
 
   const [content, setContent] = useState({
     data: [],
@@ -56,21 +56,35 @@ export const Search = () => {
     },
   });
 
+
   const fetchSearch = async () => {
-  
+  setContent({loading: true});
+  isLoad.current=true;
     try {
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=e555b12ddf56dc970b6d7235cf8f8c00&language=en-US&query=${searchText}&page=${page}&include_adult=false`
       );
+     
+      if(data.results){
+
+        setTimeout(() => {
+         
+  
+            setContent({
+              data: data.results,
+              loading: false
+            });
+           
+           isLoad.current = false;                                                           
+          
+         
+           setNumOfPages(data.total_pages);
+        }, 1000);
+      }else{
+
+        isLoad.current = false;
+      }
       
-      setTimeout(() => {
-        
-        setContent({
-          data: data.results,
-          loading: false
-        });
-      }, 1000);
-      setNumOfPages(data.total_pages);
       // console.log(data);
     } catch (error) {
       console.error(error);
@@ -124,7 +138,7 @@ export const Search = () => {
       </Tabs>
     </ThemeProvider>
    { 
-   (loading)
+   (loading && !data)
    ?  <Lottie options={defaultOptions} width={500} height={500}/>
    : 
    <div>
@@ -142,7 +156,7 @@ export const Search = () => {
           />
         ))}
       {searchText &&
-       ( !data && loading)  &&
+       ( data && !loading )  &&
         (type ? <h2>No Series Found</h2> : <h2>No Movies Found</h2>)}
     </div>
     {numOfPages > 1 && (
